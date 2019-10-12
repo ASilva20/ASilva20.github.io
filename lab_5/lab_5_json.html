@@ -11,7 +11,7 @@
     <div class="wrapper">
       <div class="header">Test JSON page</div>
       <!-- <button class="button" onclick="loadData()">Load Some JSON</button> -->
-      <button class="button" onclick="countries()">Click me to replace list entries</button>
+      <button class="button" onclick="nameCountries();">Click me to replace list entries</button>
       <div class="content">
         <ol class="instructions">
           <li>At the click of the button above</li>
@@ -279,28 +279,29 @@
       { "name": "Zimbabwe", "code": "ZW" }
     ]
     console.log("List of countries in the world", countries);
-    
+    sessionStorage.setItem("country_list", JSON.stringify(countries));
+
     function getRandom(min, max) {
       return Math.random() * (max - min) + min;
     }
-    function countries() {
+    function nameCountries() {
       const json = sessionStorage.getItem("country_list");
       const list = JSON.parse(json)
       const element = document.querySelector('.instructions')
       element.innerHTML = '';
+
       const htmlArray = list.map((i) => i.name);
       var oList = document.createElement('OL');
       element.appendChild(oList);
       const names = []
-      for (let i = 0; i < list.length; i += 1) {
+      for (let i = 0; i < 50 ; i += 1) {
         names[i] = list[i].name;
         oList.innerHTML += '<li>' + names[i] + '</li>'
       }
       
-}
-
+    }
+    
   </script>
 </body>
 
 </html>
-
