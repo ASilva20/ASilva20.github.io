@@ -11,7 +11,8 @@
     <div class="wrapper">
       <div class="header">Test JSON page</div>
       <!-- <button class="button" onclick="loadData()">Load Some JSON</button> -->
-      <button class="button" onclick="nameCountries();">Click me to replace list entries</button>
+      <button class="button" onclick="clickMe()">Click me to replace list
+        entries</button>
       <div class="content">
         <ol class="instructions">
           <li>At the click of the button above</li>
@@ -279,28 +280,35 @@
       { "name": "Zimbabwe", "code": "ZW" }
     ]
     console.log("List of countries in the world", countries);
-    sessionStorage.setItem("country_list", JSON.stringify(countries));
-
-    function getRandom(min, max) {
-      return Math.random() * (max - min) + min;
-    }
-    function nameCountries() {
-      const json = sessionStorage.getItem("country_list");
-      const list = JSON.parse(json)
-      const element = document.querySelector('.instructions')
-      element.innerHTML = '';
-
-      const htmlArray = list.map((i) => i.name);
-      var oList = document.createElement('OL');
-      element.appendChild(oList);
-      const names = []
-      for (let i = 0; i < 50 ; i += 1) {
-        names[i] = list[i].name;
-        oList.innerHTML += '<li>' + names[i] + '</li>'
-      }
+    sessionStorage.setItem('countries_arr', JSON.stringify(countries));
+    // const el = document.querySelector('button')
+    // el.addEventListener('click', (event) => {
+    // })
+    function clickMe() {
+      const json = sessionStorage.getItem('countries_arr');
+      const list = JSON.parse(json);
+      const nameArray = list.map((i) => i.name);
       
+      const instructions = document.querySelector('.instructions');
+      instructions.innerHTML = '';
+      
+      for(let i = 0; i < 50; i ++){
+        const selectNumber = getRandomIntInclusive(0, 242);
+        let el = document.createElement("li");
+        el.innerText = nameArray[selectNumber];
+        instructions.appendChild(el);
+      };
+      // i is a list item - i.name is what I want
+      // in here return only the names
+      // then we will select fifty using Math.random 
+      // and make them into innerHTML elements
+      // using Append or Replace
     }
-    
+    function getRandomIntInclusive(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+    }
   </script>
 </body>
 
