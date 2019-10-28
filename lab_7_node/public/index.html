@@ -9,23 +9,28 @@
 <body>
   <div class="container">
     <div class="wrapper">
-      <div class="header">API Loader</div>
-      <button class="button" onclick="loadData()">Load Some JSON from a server</button>
+      <div class="header">UMD Bus Routes</div>
+      <button class="button" onclick="loadData()">Load Some JSON</button>
       <div class="content"></div>
       <div class="footer"></div>
     </div>
   </div>
   <script>
+    var list = document.createElement('UL')
+      document.querySelector(".content").appendChild(list);
     function loadData() {
-      console.log('fetch'); // confirm code is running on click
-      fetch('/api')
+      fetch('https://api.umd.io/v0/bus/routes')
         .then(res => res.json())
         .then(res => {
-          console.log(res); // logging step to check what we got
+          // you can now work in this area
+          console.log(res)
           return res;
+        }) .then (res =>{
+          for(var i =0; i<res.length; i++)
+          list.innerHTML+='<li>'+ res[i].title + '</li>'
         })
-        .then(res => res.data.map(c => c.route_id))
-        .then(codes => document.querySelector(".content").innerText = codes);
+        .then(data => document.querySelector(".content").innerText = data.title);
+        
     }
   </script>
 </body>
