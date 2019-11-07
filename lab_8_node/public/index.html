@@ -16,6 +16,8 @@
     </div>
   </div>
   <script>
+    var list = document.createElement('OL')
+      document.querySelector(".content").appendChild(list);
     function loadData() {
       console.log('fetch'); // confirm code is running on click
       fetch('/api')
