@@ -46,6 +46,15 @@ app.get('/api', (req, res) => {
   fetch(baseURL)
     .then((r) => r.json())
     
+    .then((res) => res.filter(course => course.course_id.startsWith("INST")))
+
+    .then((res) => {
+      return res.map(obj => {
+      var classes = obj.course_id + " : " + obj.name;
+      return classes;
+      })
+    })
+
     .then((data) => {
       console.log(data);
       res.send({ data: data });

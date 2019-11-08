@@ -16,8 +16,9 @@
     </div>
   </div>
   <script>
-    var list = document.createElement('OL')
-      document.querySelector(".content").appendChild(list);
+    var data = document.createElement('OL')
+    document.querySelector(".content").appendChild(list);
+
     function loadData() {
       console.log('fetch'); // confirm code is running on click
       fetch('/api')
@@ -26,6 +27,13 @@
           console.log(res); // logging step to check what we got
           return res;
         })
+        .then(res => {
+          for (var i = 0; i < res.data; i++)
+            data.innerHTML += '<li>' + res[i].classes + '</li>'
+
+          return res;
+        })
+
         .then(res => res.data.map(c => c.course_id))
         .then(codes => document.querySelector(".content").innerText = codes);
     }
