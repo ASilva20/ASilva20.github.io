@@ -22,6 +22,8 @@
     function loadData() {
       console.log('fetch'); // confirm code is running on click
       fetch('/api')
+      .then(res => res.json())
+      
       .then(res => {
           console.log(res);
           let htmlTarget = document.querySelector(".content");
